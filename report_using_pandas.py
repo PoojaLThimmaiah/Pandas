@@ -43,7 +43,7 @@ def client_selfpay(i):
         return "Client"
     elif i == "Self Pay":
         return "Selfpay"
-def good_movie(row):
+def category1(row):
     AR_Bal = row["Current A/R Balance"]
     finclass = row["Current Fin Class"]
     aging = row["Aging Category"]
@@ -62,7 +62,7 @@ def good_movie(row):
     else:
         return "Insurance"
     
-df["Category"]= df.apply(good_movie,axis="columns")
+df["Category"]= df.apply(category1,axis="columns")
 df1 = df.pivot_table(values="Current A/R Balance", index = ["Ambulatory/Acute","Ageing Bucket"],aggfunc="sum")
 writer = pd.ExcelWriter(path = "C:\\Pooja\\Report\\Report_1104 - Worked.xlsx", engine = 'xlsxwriter')
 df.to_excel(writer, sheet_name="Worked")
